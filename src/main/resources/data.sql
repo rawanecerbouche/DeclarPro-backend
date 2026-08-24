@@ -19,7 +19,8 @@ INSERT INTO port_entree (id, code, nom, ville, active) VALUES
                                                            (10, 'KENITRA', 'Port de Kénitra', 'Kénitra', true),
                                                            (11, 'TAN-TAN', 'Port de Tan-Tan', 'Tan-Tan', true),
                                                            (12, 'LAAYOUNE', 'Port de Laâyoune', 'Laâyoune', true),
-                                                           (13, 'DAKHLA', 'Port de Dakhla', 'Dakhla', true);
+                                                           (13, 'DAKHLA', 'Port de Dakhla', 'Dakhla', true)
+ON CONFLICT (id) DO NOTHING;
 
 -- ---------------------------------------------------------
 -- ORGANISME
@@ -28,7 +29,9 @@ INSERT INTO organisme (id, code, nom, description, active) VALUES
                                                                (1, 'ADII', 'Administration des Douanes et Impôts Indirects', 'Autorité douanière marocaine', true),
                                                                (2, 'ONSSA', 'Office National de Sécurité Sanitaire des Aliments', 'Contrôle sanitaire des produits alimentaires', true),
                                                                (3, 'OC', 'Office des Changes', 'Contrôle des opérations de change', true),
-                                                               (4, 'MI', 'Ministère de l''Industrie', 'Autorisations industrielles', true);
+                                                               (4, 'MI', 'Ministère de l''Industrie', 'Autorisations industrielles', true),
+                                                               (5, 'ANRT', 'Agence Nationale de Réglementation des Télécommunications', 'Homologation des équipements émettant ou recevant des ondes (drones, WiFi, objets connectés) avant importation', true)
+ON CONFLICT (id) DO NOTHING;
 
 -- ---------------------------------------------------------
 -- REFERENCE_JURIDIQUE
@@ -39,7 +42,8 @@ INSERT INTO reference_juridique (id, code, type_texte, numero, titre, date_publi
                                                                                                                                                                  (3, 'LOI-CHANGE', 'Loi', '30-15', 'Loi relative à l''Office des Changes', '2018-06-01', '2018-06-01', NULL, 'Bulletin Officiel', 'Encadrement des opérations de change', true),
                                                                                                                                                                  (4, 'LOI-13-89', 'Loi', '13-89', 'Loi relative au commerce extérieur', '1992-11-09', '1992-11-09', NULL, 'Dahir n° 1-91-261 du 13 joumada I 1413', 'Loi fondamentale regissant les engagements, licences d''importation/exportation et franchises douanieres', true),
                                                                                                                                                                  (5, 'DEC-93-415', 'Decret', '2-93-415', 'Decret pris pour l''application de la loi 13-89 relative au commerce exterieur', '1993-07-02', '1993-07-02', NULL, 'Bulletin Officiel N4212 du 21.07.1993, modifie BO N4796 du 18.05.2000', 'Fixe les modalites d''importation/exportation, licences, franchises douanieres, mesures de sauvegarde (anti-dumping)', true),
-                                                                                                                                                                 (6, 'ARR-1675-15', 'Arrete', '1675-15', 'Arrete fixant les modalites de souscription des titres d''importation et d''exportation', '2015-05-19', '2015-05-19', NULL, 'Bulletin Officiel N6366 du 4-6-2015', 'Fixe la souscription electronique via Portnet des engagements/licences d''importation, duree de validite 6 mois', true);
+                                                                                                                                                                 (6, 'ARR-1675-15', 'Arrete', '1675-15', 'Arrete fixant les modalites de souscription des titres d''importation et d''exportation', '2015-05-19', '2015-05-19', NULL, 'Bulletin Officiel N6366 du 4-6-2015', 'Fixe la souscription electronique via Portnet des engagements/licences d''importation, duree de validite 6 mois', true)
+ON CONFLICT (id) DO NOTHING;
 
 -- ---------------------------------------------------------
 -- DOCUMENT_REFERENTIEL
@@ -56,7 +60,8 @@ INSERT INTO document_referentiel (id, organisme_id, code, libelle, type_portnet,
                                                                                                                                  (9, 4, 'LIC-IMPORT', 'Licence d''Importation', 'LICENCE', 30, false, 'Requise pour les marchandises soumises a restriction ; decision notifiee sous 30 jours (Decret 2-93-415 Art.4)', true),
                                                                                                                                  (10, 4, 'DPI', 'Declaration Prealable d''Importation', 'DECLARATION_PREALABLE', 20, false, 'Requise pour certaines marchandises specifiques ; instruite en 10 a 20 jours (Decret 2-93-415 Art.27-28)', true),
                                                                                                                                  (11, 4, 'FRANCHISE-DOUANE', 'Demande de Franchise Douaniere', 'FRANCHISE', 30, false, 'A soumettre pour beneficier d''une exoneration des droits de douane sur certaines marchandises', true),
-                                                                                                                                 (12, 4, 'CUF', 'Certificat d''Utilisation Finale', 'CERTIFICAT', 15, false, 'Certifie que les biens importes sont destines au marche marocain et ne seront pas reexportes vers un pays tiers (biens sensibles/double usage)', true);
+                                                                                                                                 (12, 4, 'CUF', 'Certificat d''Utilisation Finale', 'CERTIFICAT', 15, false, 'Certifie que les biens importes sont destines au marche marocain et ne seront pas reexportes vers un pays tiers (biens sensibles/double usage)', true)
+ON CONFLICT (id) DO NOTHING;
 
 -- ---------------------------------------------------------
 -- REGLE_DOCUMENTAIRE
@@ -72,7 +77,59 @@ INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimensi
                                                                                                                                  (8, 9, 5, 'produit_soumis_licence', 'true', false, true, 'Requise uniquement si le produit figure sur la liste des marchandises soumises a licence'),
                                                                                                                                  (9, 10, 5, 'produit_soumis_declaration_prealable', 'true', false, true, 'Requise uniquement pour les marchandises soumises a declaration prealable'),
                                                                                                                                  (10, 11, 5, 'exoneration_demandee', 'true', false, true, 'A soumettre uniquement si l''importateur sollicite une exoneration des droits de douane'),
-                                                                                                                                 (11, 12, 4, 'produit_sensible', 'true', false, true, 'Requis pour les biens a double usage ou sensibles necessitant une garantie de destination finale');
+                                                                                                                                 (11, 12, 4, 'produit_sensible', 'true', false, true, 'Requis pour les biens a double usage ou sensibles necessitant une garantie de destination finale')
+ON CONFLICT (id) DO NOTHING;
+
+-- =========================================================
+-- regle_documentaire — nouvelles règles (ids 12 à 25)
+-- Sources : Arrêté 1675-15 (BO 6366), Décret 2-93-415, Liste des produits soumis à
+-- licence d'importation (Ministère de l'Industrie et du Commerce / DGC), ANNEXE_1 (sacs plastiques)
+-- =========================================================
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(12, 8, 6, 'MODALITE_PAIEMENT', 'Sans paiement', false, true, 'Dispense d''Engagement d''Importation lorsque l''operation est realisee sans paiement (Arrete 1675-15 Art.2)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(13, 8, 6, 'REGIME_DOUANIER', 'Regime particulier/suspensif (Titre VI, Chapitre 1er du CDII)', false, true, 'Dispense d''Engagement d''Importation pour les marchandises placees sous un regime douanier particulier (admission temporaire, entrepot, etc.) (Arrete 1675-15 Art.2)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(14, 9, NULL, 'CODE_SH', '2524.10.00.00 / 2524.90.00.00', true, true, 'Licence d''importation obligatoire pour l''amiante (Liste DGC des produits soumis a licence)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(15, 9, NULL, 'CODE_SH', '3901.10 / 3901.20', true, true, 'Licence d''importation obligatoire pour le polyethylene sous formes primaires (Liste DGC)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(16, 9, NULL, 'CODE_SH', '72.04', true, true, 'Licence d''importation obligatoire pour les dechets et debris de fonte, fer ou acier (Liste DGC)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(17, 9, NULL, 'CODE_SH', '72071100', true, true, 'Licence d''importation obligatoire pour les billettes d''acier (Liste DGC ; cf. Questionnaire billette d''acier)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(18, 9, NULL, 'CODE_SH', '4012.11 a 4012.20', true, true, 'Licence d''importation obligatoire pour les pneumatiques rechapes ou usages (Liste DGC)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(19, 9, NULL, 'CODE_SH', '6309.00', true, true, 'Licence d''importation obligatoire pour la friperie (Liste DGC)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(20, 9, NULL, 'CODE_SH', '88.06 / EX9503.00', true, true, 'Licence d''importation obligatoire pour les drones / engins volants sans pilote (Liste DGC ; cf. fiche d''information drone)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(21, 9, NULL, 'CODE_SH', 'Chapitre 36 sauf 3605.00.00 a 3606.90.00.11', true, true, 'Licence d''importation obligatoire pour les explosifs et articles de pyrotechnie (Liste DGC)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(22, 9, NULL, 'CODE_SH', '9307.00.00.00', true, true, 'Licence d''importation obligatoire pour les armes blanches (sabres, epees, baionnettes) (Liste DGC)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(23, 9, NULL, 'CODE_SH', '7213.91.90.00', true, true, 'Licence d''importation obligatoire pour les fils machine de fer (Liste DGC, cite Circulaire 6611/311 du 20/11/2024, non rattachable a une reference_juridique existante)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(24, 9, 5, 'CATEGORIE_PRODUIT', 'Matieres premieres en polyethylene pour fabrication de sacs plastiques', true, true, 'Licence d''importation obligatoire pour les distributeurs de matieres plastiques destinees a la fabrication de sacs ; decision notifiee sous 30 jours (Decret 2-93-415 Art.4, cite dans le formulaire ANNEXE_1)') ON CONFLICT (id) DO NOTHING;
+
+INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
+(25, 11, 5, 'REGIME_DOUANIER', 'Franchise douaniere', true, true, 'Toute demande de franchise douaniere suit un circuit ministeriel, decision motivee sous 30 jours (Decret 2-93-415 Art.4, formulaire DFDMIC)') ON CONFLICT (id) DO NOTHING;
+
+-- Reajustement de la sequence
+SELECT setval(pg_get_serial_sequence('regle_documentaire', 'id'), (SELECT MAX(id) FROM regle_documentaire));
 
 -- ---------------------------------------------------------
 -- REGLE_COHERENCE
@@ -83,7 +140,8 @@ INSERT INTO regle_coherence (id, code, libelle, dimension, operateur, valeur_ref
                                                                                                                                        (3, 'RC-003', 'Écart valeur en douane / factures', 'valeur_douane', '<=', '10%', 'critique', 25, 'L''écart entre la valeur en douane et le total des factures dépasse 10%', true),
                                                                                                                                        (4, 'RC-004', 'Devise facture différente du titre', 'devise', '=', 'devise_titre', 'critique', 15, 'La devise de la facture ne correspond pas à la devise du titre d''importation', true),
                                                                                                                                        (5, 'RC-005', 'Poids net supérieur au poids brut', 'poids_net', '<=', 'poids_brut', 'critique', 30, 'Le poids net déclaré est supérieur au poids brut, ce qui est incohérent', true),
-                                                                                                                                       (6, 'RC-006', 'Ratio valeur/poids hors bornes SH', 'ratio_valeur_poids', 'entre', 'bornes_sh', 'warning', 10, 'Le ratio valeur en douane / poids net sort des bornes attendues pour ce code SH', true);
+                                                                                                                                       (6, 'RC-006', 'Ratio valeur/poids hors bornes SH', 'ratio_valeur_poids', 'entre', 'bornes_sh', 'warning', 10, 'Le ratio valeur en douane / poids net sort des bornes attendues pour ce code SH', true)
+ON CONFLICT (id) DO NOTHING;
 
 -- ---------------------------------------------------------
 -- Réajustement des séquences (important en PostgreSQL !)
