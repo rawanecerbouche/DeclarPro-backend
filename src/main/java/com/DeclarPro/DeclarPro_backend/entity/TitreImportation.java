@@ -31,6 +31,9 @@ public class TitreImportation {
     @Column(name = "numero_enregistrement", length = 50)
     private String numeroEnregistrement;
 
+    @Column(name = "categorie_titre", length = 10)
+    private String categorieTitre;
+
     @Column(name = "etat", length = 30)
     private String etat;
 

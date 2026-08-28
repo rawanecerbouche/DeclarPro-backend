@@ -31,6 +31,9 @@ public class Facture {
     @Column(name = "montant", precision = 14, scale = 2)
     private BigDecimal montant;
 
+    @Column(name = "devise", length = 10)
+    private String devise;
+
     @Column(name = "date")
     private LocalDate date;
 

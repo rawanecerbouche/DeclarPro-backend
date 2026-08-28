@@ -93,7 +93,9 @@ INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimensi
 (13, 8, 6, 'REGIME_DOUANIER', 'Regime particulier/suspensif (Titre VI, Chapitre 1er du CDII)', false, true, 'Dispense d''Engagement d''Importation pour les marchandises placees sous un regime douanier particulier (admission temporaire, entrepot, etc.) (Arrete 1675-15 Art.2)') ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
-(14, 9, NULL, 'CODE_SH', '2524.10.00.00 / 2524.90.00.00', true, true, 'Licence d''importation obligatoire pour l''amiante (Liste DGC des produits soumis a licence)') ON CONFLICT (id) DO NOTHING;
+(14, 9, NULL, 'CODE' ||
+              '' ||
+              'clclaude_SH', '2524.10.00.00 / 2524.90.00.00', true, true, 'Licence d''importation obligatoire pour l''amiante (Liste DGC des produits soumis a licence)') ON CONFLICT (id) DO NOTHING;
 
 INSERT INTO regle_documentaire (id, document_id, reference_juridique_id, dimension, value, obligatoire, active, description) VALUES
 (15, 9, NULL, 'CODE_SH', '3901.10 / 3901.20', true, true, 'Licence d''importation obligatoire pour le polyethylene sous formes primaires (Liste DGC)') ON CONFLICT (id) DO NOTHING;

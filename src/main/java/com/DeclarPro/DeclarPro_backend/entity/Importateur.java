@@ -2,7 +2,6 @@ package com.DeclarPro.DeclarPro_backend.entity;
 import com.DeclarPro.DeclarPro_backend.entity.TitreImportation;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.valueextraction.UnwrapByDefault;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,8 +28,7 @@ public class Importateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ID_importateur;
-    @NotBlank
-    @Column(name = "Description",length = 255,nullable = false)
+    @Column(name = "Description", length = 255)
     private String Desciption;
 
     /** Centre du registre de commerce (front : centreRC). */

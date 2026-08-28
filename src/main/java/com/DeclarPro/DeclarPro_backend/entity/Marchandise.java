@@ -33,6 +33,18 @@ public class Marchandise {
     @Column(name = "poids_net", precision = 12, scale = 2)
     private BigDecimal poidsNet;
 
+    @Column(name = "poids_brut", precision = 12, scale = 2)
+    private BigDecimal poidsBrut;
+
+    @Column(name = "pays_origine", length = 5)
+    private String paysOrigine;
+
+    @Column(name = "categorie_produit", length = 30)
+    private String categorieProduit;
+
+    @Column(name = "unite", length = 20)
+    private String unite;
+
     @Column(name = "quantite", precision = 12, scale = 2)
     private BigDecimal quantite;
 
